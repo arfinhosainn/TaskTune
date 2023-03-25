@@ -1,19 +1,15 @@
 package com.example.tasktune.di
 
-import android.app.Application
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
-import com.example.tasktune.data.remote.AuthRepositoryImpl
 import com.example.tasktune.data.remote.HttpInterceptor
 import com.example.tasktune.data.remote.authapi.AuthApi
-import com.example.tasktune.domain.repositories.AuthRepository
+import com.example.tasktune.data.remote.todoapi.ToDoApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.Retrofit.Builder
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -21,13 +17,11 @@ import javax.inject.Singleton
 object NetworkModule {
 
 
-
     @Singleton
     @Provides
-    fun providesRetrofit(): Retrofit.Builder {
-
-        return Retrofit.Builder().baseUrl("http://192.168.0.11:8089/")
-            .addConverterFactory(MoshiConverterFactory.create())
+    fun providesRetrofit(): Builder {
+        return Builder().baseUrl("http://192.168.0.11:8089/")
+            .addConverterFactory(GsonConverterFactory.create())
     }
 
     @Singleton
@@ -37,24 +31,16 @@ object NetworkModule {
     }
 
 
-    @Provides
-    @Singleton
-    fun provideSharedPref(app: Application): SharedPreferences {
-        return app.getSharedPreferences("prefs", MODE_PRIVATE)
-    }
-
-
-    @Provides
-    @Singleton
-    fun providesAuthRepository(api: AuthApi, pref: SharedPreferences): AuthRepository {
-        return AuthRepositoryImpl(api, pref)
-    }
-
 
     @Singleton
     @Provides
-    fun providesAuthApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): AuthApi {
+    fun providesAuthApi(retrofitBuilder: Builder, okHttpClient: OkHttpClient): AuthApi {
         return retrofitBuilder.client(okHttpClient).build().create(AuthApi::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun providesToDoApi(retrofitBuilder: Builder, okHttpClient: OkHttpClient):ToDoApi {
+        return retrofitBuilder.client(okHttpClient).build().create(ToDoApi::class.java)
+    }
 }

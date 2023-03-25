@@ -41,7 +41,7 @@ fun SignUpScreen(
         viewModel.authResults.collect { result ->
             when (result) {
                 is AuthResult.Authorized -> {
-                    navController.navigate(Screens.HomeScreen.route) {
+                    navController.navigate(Screens.Home.route) {
                         popUpTo(Screens.SignUpScreen.route) {
                             inclusive = true
                         }

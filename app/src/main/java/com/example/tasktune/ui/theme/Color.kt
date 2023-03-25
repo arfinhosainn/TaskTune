@@ -16,3 +16,10 @@ val Sky100 = Color(0xFFdcf4f6)
 val Orange50 = Color(0xFFf7e7e3)
 val OutlineVariant = Color(0xFF45464F)
 val Outline = Color(0xFF757780)
+
+
+val DarkYellow  = Color(0xFFfadf36)
+val DarkBlue  = Color(0xFF3368fb)
+val DarkPink  = Color(0xFFae3c76)
+val DarkPaste  = Color(0xFF05efaf)
+val DarkOrange  = Color(0xFFff7549)
