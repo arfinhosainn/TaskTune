@@ -104,9 +104,7 @@ class MainActivity : ComponentActivity() {
                         Box {
                             FloatingActionButton(
                                 onClick = {
-                                    scope.launch {
-                                        bottomSheetScaffoldState.show()
-                                    }
+                                    navController.navigate(Screens.AddEditTodo.route)
                                 },
                                 backgroundColor = Color.White
                             ) {

@@ -7,6 +7,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.tasktune.presentation.add_edit_todo.AddEditTodoScreen
 import com.example.tasktune.presentation.auth.SignInScreen
 import com.example.tasktune.presentation.auth.SignUpScreen
 import com.example.tasktune.presentation.calendar.CalendarScreen
@@ -18,7 +19,7 @@ import com.example.tasktune.presentation.profile.ProfileScreen
 @Composable
 fun NavigationGraph(navHostController: NavHostController) {
 
-    NavHost(navController = navHostController, startDestination = Screens.Home.route) {
+    NavHost(navController = navHostController, startDestination = Screens.AddEditTodo.route) {
         composable(route = Screens.SignUpScreen.route) {
             SignUpScreen(navController = navHostController)
 
@@ -40,6 +41,9 @@ fun NavigationGraph(navHostController: NavHostController) {
         }
         composable(route = Screens.Calendar.route) {
             CalendarScreen()
+        }
+        composable(route = Screens.AddEditTodo.route) {
+            AddEditTodoScreen(navController = navHostController)
         }
     }
 

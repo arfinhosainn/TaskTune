@@ -19,7 +19,7 @@ val Outline = Color(0xFF757780)
 
 
 val DarkYellow  = Color(0xFFfadf36)
-val DarkBlue  = Color(0xFF3368fb)
+val DarkBlue  = Color(0xFF4566EC)
 val DarkPink  = Color(0xFFae3c76)
 val DarkPaste  = Color(0xFF05efaf)
 val DarkOrange  = Color(0xFFff7549)

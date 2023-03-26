@@ -17,7 +17,7 @@ data class ToDo(
     val color: Int
 ) {
     companion object {
-        val noteColors = listOf(DarkBlue, DarkOrange, DarkPaste, DarkPink, DarkYellow)
+        val todoColors = listOf(DarkBlue, DarkOrange, DarkPaste, DarkPink, DarkYellow)
     }
 }
 

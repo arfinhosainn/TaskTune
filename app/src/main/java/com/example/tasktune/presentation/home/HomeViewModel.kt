@@ -35,7 +35,7 @@ class HomeViewModel @Inject constructor(
                         _homeState.value = HomeState(loading = true)
                     }
                     is Resource.Success -> {
-                        _homeState.value = HomeState(data = result.data?.todos ?: emptyList())
+                        _homeState.value = HomeState(data = result.data ?: emptyList())
                     }
                 }
             }
