@@ -18,6 +18,7 @@ import com.example.tasktune.navigation.NavigationGraph
 import com.example.tasktune.navigation.Screens
 import com.example.tasktune.presentation.common.BottomNavItem
 import com.example.tasktune.presentation.common.BottomNavigationBar
+import com.example.tasktune.ui.theme.DarkBlue
 import com.example.tasktune.ui.theme.TaskTuneTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -104,19 +105,17 @@ class MainActivity : ComponentActivity() {
                         Box {
                             FloatingActionButton(
                                 onClick = {
-                                    navController.navigate(Screens.AddEditTodo.route)
+                                    navController.navigate(Screens.Write.route)
                                 },
-                                backgroundColor = Color.White
+                                backgroundColor = DarkBlue
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Add,
-                                    contentDescription = "Add"
+                                    contentDescription = "Add", tint = Color.White
                                 )
                             }
                         }
                     },
-                    floatingActionButtonPosition = FabPosition.Center,
-                    isFloatingActionButtonDocked = true,
                 ) { paddingValues ->
                     Column(modifier = Modifier.padding(paddingValues)) {
                         NavigationGraph(navHostController = navController)

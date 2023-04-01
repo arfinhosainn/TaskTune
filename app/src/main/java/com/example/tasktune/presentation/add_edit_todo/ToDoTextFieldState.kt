@@ -10,6 +10,7 @@ data class ToDoTextFieldState(
     val isHintVisible: Boolean = true,
     val date: LocalDate = LocalDate.now(),
     val startTime: LocalTime = LocalTime.now(),
-    val endTime: LocalTime = LocalTime.now()
+    val endTime: LocalTime = LocalTime.now(),
+    val color: Int? = 0
 
 )

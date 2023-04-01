@@ -1,7 +1,6 @@
 package com.example.tasktune.presentation.add_edit_todo
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +11,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,7 +37,7 @@ class AddEditToDoViewModel @Inject constructor(
     var todoContent = mutableStateOf(ToDoTextFieldState())
         private set
 
-    var todoColor = mutableStateOf(ToDo.todoColors.random().toArgb())
+    var todoColor = mutableStateOf(ToDoTextFieldState())
         private set
 
     private val _eventFlow = MutableSharedFlow<UiEvent>()
@@ -61,7 +59,9 @@ class AddEditToDoViewModel @Inject constructor(
                             text = todo.content,
                             isHintVisible = false
                         )
-                        todoColor.value = todo.color
+                        todoColor.value = todoColor.value.copy(
+                            color = todo.color
+                        )
                     }
                 }
             }
@@ -72,7 +72,9 @@ class AddEditToDoViewModel @Inject constructor(
     fun onEvent(event: AddEdiTodoEvent) {
         when (event) {
             is AddEdiTodoEvent.ChangeColor -> {
-                todoColor.value = event.color
+                todoColor.value = todoColor.value.copy(
+                    color = event.color
+                )
             }
             is AddEdiTodoEvent.EnteredContent -> {
                 todoContent.value = todoContent.value.copy(
@@ -116,7 +118,7 @@ class AddEditToDoViewModel @Inject constructor(
                                 startTime = todoStartTime.value.startTime.toString(),
                                 endTime = todoEndTime.value.endTime.toString(),
                                 done = todoState.value.done,
-                                color = todoColor.value
+                                color = todoColor.value.color!!
                             )
                         )
                         _eventFlow.emit(UiEvent.SaveTodo)

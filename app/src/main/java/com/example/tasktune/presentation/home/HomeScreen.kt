@@ -1,77 +1,110 @@
 package com.example.tasktune.presentation.home
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Checkbox
+import androidx.compose.material.CheckboxDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.tasktune.navigation.Screens
-import com.example.tasktune.presentation.common.BottomNavItem
-import com.example.tasktune.presentation.common.BottomNavigationBar
-import kotlinx.coroutines.launch
+import com.example.tasktune.data.remote.dto.ToDo
+import com.example.tasktune.presentation.home.components.HomeState
+import com.example.tasktune.ui.theme.DarkBlue
+import com.example.tasktune.ui.theme.FontPoppins
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeScreen(navController: NavController) {
-
-    var selectedBottomNavItem by remember { mutableStateOf(0) }
-    val scope = rememberCoroutineScope()
-    val scaffoldState = rememberScaffoldState()
-    var showBottomSheet by remember { mutableStateOf(false) }
-
-    val bottomSheetScaffoldState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+fun HomeScreen(navController: NavController, homeState: HomeState) {
 
 
+    Box(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 20.dp)
+        ) {
+            item {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "Task Name",
+                        style = TextStyle(
+                            fontFamily = FontPoppins,
+                            fontSize = 15.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
 
+                    Text(
+                        text = "View All",
+                        style = TextStyle(
+                            fontFamily = FontPoppins,
+                            fontSize = 15.sp,
+                            color = DarkBlue,
+                            fontWeight = FontWeight.Medium
+                        )
+                    )
+                }
+            }
+
+            items(homeState.data) {
+                TodoRow(toDo = it, isCompleted = it.done, onCheckedChange = {
+
+                })
+            }
+        }
+
+
+    }
 
 }
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BottomSheetContent(onDismiss: () -> Unit) {
-    val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
-    ModalBottomSheetLayout(
-        sheetState = sheetState,
-        sheetContent = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            ) {
-                Text(
-                    text = "This is the bottom sheet content",
-                    modifier = Modifier.align(Alignment.Center)
+fun TodoRow(
+    toDo: ToDo,
+    isCompleted: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Checkbox(
+                checked = isCompleted,
+                onCheckedChange = onCheckedChange,
+                colors = CheckboxDefaults.colors(
+                    checkedColor = DarkBlue,
+                    uncheckedColor = DarkBlue
                 )
-            }
-        },
-        content = {
-            // Your main content here
+            )
+            Text(
+                text = toDo.title,
+                style = if (isCompleted) {
+                    TextStyle(textDecoration = TextDecoration.LineThrough)
+                } else {
+                    TextStyle.Default
+                }
+            )
         }
-    )
-    LaunchedEffect(sheetState.isVisible) {
-        if (sheetState.isVisible) {
-            sheetState.show()
-        } else {
-            sheetState.hide()
-            onDismiss()
-        }
+        Icon(imageVector = Icons.Default.Done, contentDescription = "Done")
     }
 }
-
-
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewHomeScreen() {
-//    HomeScreen()
-//
-//}
 
