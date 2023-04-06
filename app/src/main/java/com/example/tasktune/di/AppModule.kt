@@ -3,12 +3,12 @@ package com.example.tasktune.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.network.ToDoApi
+import com.example.network.repsitory.ToDoRepository
+import com.example.network.repsitory.ToDoRepositoryImpl
 import com.example.tasktune.data.remote.AuthRepositoryImpl
 import com.example.tasktune.data.remote.authapi.AuthApi
-import com.example.tasktune.data.remote.repositories.ToDoRepositoryImpl
-import com.example.tasktune.data.remote.todoapi.ToDoApi
 import com.example.tasktune.domain.repositories.AuthRepository
-import com.example.tasktune.domain.repositories.ToDoRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +22,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesToDoRepository(api: ToDoApi):ToDoRepository{
+    fun providesToDoRepository(api: ToDoApi): ToDoRepository {
         return ToDoRepositoryImpl(api)
     }
 

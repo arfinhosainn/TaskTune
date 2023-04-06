@@ -2,9 +2,9 @@ package com.example.tasktune.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tasktune.domain.repositories.ToDoRepository
+import com.example.network.repsitory.ToDoRepository
 import com.example.tasktune.presentation.home.components.HomeState
-import com.example.tasktune.utils.Resource
+import com.example.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

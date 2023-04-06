@@ -19,10 +19,10 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.tasktune.data.remote.dto.ToDo
 import com.example.tasktune.presentation.home.components.HomeState
 import com.example.tasktune.ui.theme.DarkBlue
 import com.example.tasktune.ui.theme.FontPoppins
+import com.example.util.model.ToDo
 
 
 @Composable

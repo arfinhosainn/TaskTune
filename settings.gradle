@@ -14,3 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "TaskTune"
 include ':app'
+include ':feature:write'
+include ':core:util'
+include ':core:ui'
+include ':data:network'

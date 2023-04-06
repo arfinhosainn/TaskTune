@@ -1,8 +1,8 @@
 package com.example.tasktune.di
 
+import com.example.network.ToDoApi
 import com.example.tasktune.data.remote.HttpInterceptor
 import com.example.tasktune.data.remote.authapi.AuthApi
-import com.example.tasktune.data.remote.todoapi.ToDoApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
